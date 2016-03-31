@@ -25,9 +25,11 @@ ext_plugin_telegram_chat_id=@ScouterDemoChannel
     - scouter.common
     - scouter.server
 * Library
-    - activation-1.1.1.jar
-    - commons-email-1.4.jar
-    - javax.mail-1.5.2.jar
+    - commons-codec-1.9.jar
+    - commons-logging-1.2.jar
+    - gson-2.6.2.jar
+    - httpclient-4.5.2.jar
+    - httpcore-4.4.4.jar
     
 ### Build & Deploy
 * Build
