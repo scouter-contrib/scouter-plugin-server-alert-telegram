@@ -7,7 +7,8 @@
 	- Agent의 Memory (warning / fatal)
 	- Agent의 Disk (warning / fatal)
 	- 신규 Agent 연결
-	- Agent의 연결 해제 (연결 해제된 Agent의 재접속은 Scouter Server 내부 이슈로 지연)
+	- Agent의 연결 해제
+	- Agent의 재접속
 
 ### Properties (스카우터 서버 설치 경로 하위의 conf/scouter.conf)
 * **_ext\_plugin\_telegram\_send\_alert_** : Telegram 메시지 발송 여부 (true / false) - 기본 값은 false
@@ -26,7 +27,7 @@ ext_plugin_telegram_bot_token=185780011:AAGVaPyWCoZ8y1mHZEK1jFmbLwpcjlsJoJY
 ext_plugin_telegram_chat_id=@ScouterDemoChannel
 ```
 
-### dependencies
+### Dependencies
 * Project
     - scouter.common
     - scouter.server
