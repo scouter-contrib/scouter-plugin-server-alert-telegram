@@ -9,6 +9,9 @@
 	- 신규 Agent 연결
 	- Agent의 연결 해제
 	- Agent의 재접속
+    - 응답시간의 임계치 초과
+    - GC Time의 임계치 초과
+    - Thread 갯수의 임계치 초과
 
 ### Properties (스카우터 서버 설치 경로 하위의 conf/scouter.conf)
 * **_ext\_plugin\_telegram\_send\_alert_** : Telegram 메시지 발송 여부 (true / false) - 기본 값은 false
@@ -16,6 +19,9 @@
 * **_ext\_plugin\_telegram\_level_** : 수신 레벨(0 : INFO, 1 : WARN, 2 : ERROR, 3 : FATAL) - 기본 값은 0
 * **_ext\_plugin\_telegram\_bot\_token_** : Telegram Bot Token
 * **_ext\_plugin\_telegram\_chat\_id_** : chat_id(Integer) 또는 채널 이름(String)
+* **_ext\_plugin\_elapsed\_time_threshold_** : 응답시간의 임계치 (ms) - 기본 값은 0으로, 0일때 응답시간의 임계치 초과 여부를 확인하지 않는다.
+* **_ext\_plugin\_gc\_time_threshold_** : GC Time의 임계치 (ms) - 기본 값은 0으로, 0일때 GC Time의 임계치 초과 여부를 확인하지 않는다.
+* **_ext\_plugin\_thread\_count_threshold_** : Thread Count의 임계치 - 기본 값은 0으로, 0일때 Thread Count의 임계치 초과 여부를 확인하지 않는다.
 
 * Example
 ```
@@ -25,6 +31,10 @@ ext_plugin_telegram_debug=true
 ext_plugin_telegram_level=0
 ext_plugin_telegram_bot_token=185780011:AAGVaPyWCoZ8y1mHZEK1jFmbLwpcjlsJoJY
 ext_plugin_telegram_chat_id=@ScouterDemoChannel
+
+ext_plugin_elapsed_time_threshold=5000
+ext_plugin_gc_time_threshold=5000
+ext_plugin_thread_count_threshold=300
 ```
 
 ### Dependencies
