@@ -93,7 +93,7 @@ public class TelegramPlugin {
 				        			
 				    		        ap.level = AlertLevel.WARN;
 				    		        ap.objHash = objHash;
-				    		        ap.title = "Thread count exceed a threahold.";
+				    		        ap.title = "Thread count exceed a threshold.";
 				    		        ap.message = objectPack.objName + "'s Thread count(" + threadCount + ") exceed a threshold.";
 				    		        ap.time = System.currentTimeMillis();
 				    		        ap.objType = objectPack.objType;
@@ -241,7 +241,7 @@ public class TelegramPlugin {
     			
 		        ap.level = AlertLevel.WARN;
 		        ap.objHash = pack.objHash;
-		        ap.title = "Elapsed time exceed a threahold.";
+		        ap.title = "Elapsed time exceed a threshold.";
 		        ap.message = "[" + AgentManager.getAgentName(pack.objHash) + "] " 
 		        				+ pack.service + "(" + serviceName + ") "
 		        				+ "elapsed time(" + pack.elapsed + " ms) exceed a threshold.";
@@ -288,7 +288,7 @@ public class TelegramPlugin {
 	        			
 	    		        ap.level = AlertLevel.WARN;
 	    		        ap.objHash = objHash;
-	    		        ap.title = "GC time exceed a threahold.";
+	    		        ap.title = "GC time exceed a threshold.";
 	    		        ap.message = objName + "'s GC time(" + gcTime + " ms) exceed a threshold.";
 	    		        ap.time = System.currentTimeMillis();
 	    		        ap.objType = objType;
