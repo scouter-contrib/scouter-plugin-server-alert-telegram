@@ -67,6 +67,8 @@ public class TelegramPlugin {
     
     private static AtomicInteger ai = new AtomicInteger(0);
     private static List<Integer> javaeeObjHashList = new ArrayList<Integer>();
+    private static AlertPack lastPack;
+    private static long lastSentTimestamp;
     
     public TelegramPlugin() {
     	if (ai.incrementAndGet() == 1) {
@@ -150,7 +152,42 @@ public class TelegramPlugin {
                             	title = "An object has been inactivated.";
                             	msg = pack.message.substring(0, pack.message.indexOf("OBJECT") - 1);
                             }
-                          
+                            
+                            try {
+	                            String ignoreNamePattern = conf.getValue("ext_plugin_ignore_name_patterns");
+	                            String ignoreTitlePattern = conf.getValue("ext_plugin_ignore_title_patterns");
+	                            
+	                            if (ignoreNamePattern != null && !"".equals(ignoreNamePattern)) {
+		                            for (String pattern : ignoreNamePattern.split(",")) {
+		                        		if (name.matches(".*[" + pattern.replaceAll("-", "\\\\-") + "].*")) {
+		                        			return;
+		                        		}
+		                        	}
+	                            }
+
+	                            if (ignoreTitlePattern != null && !"".equals(ignoreTitlePattern)) {
+		                            for (String pattern : ignoreTitlePattern.split(",")) {
+		                        		if (title.matches(".*[" + pattern.replaceAll("-", "\\\\-") + "].*")) {
+		                        			return;
+		                        		}
+		                        	}
+	                            }
+	                            
+	                            if (conf.getBoolean("ext_plugin_ignore_continuous_dup_alert", false) && lastPack != null) {
+		                            long diff = System.currentTimeMillis() - lastSentTimestamp;
+	                            	if (lastPack.objHash == pack.objHash 
+	                            			&& lastPack.title.equals(pack.title)
+	                            			&& diff < DateUtil.MILLIS_PER_HOUR) {
+	                            		return;
+	                            	}
+	                            }
+	                            
+	                            lastPack = pack;
+                            } catch (Exception e) {
+                            	// ignore
+                            	println("[Error] : " + e.getMessage());
+                            }
+                            
                         	// Make message contents
                             String contents = "[TYPE] : " + pack.objType.toUpperCase() + "\n" + 
                                            	  "[NAME] : " + name + "\n" + 
@@ -171,6 +208,7 @@ public class TelegramPlugin {
                             HttpResponse response = client.execute(post);
                             
                             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                            	lastSentTimestamp = System.currentTimeMillis();
                                 println("Telegram message sent to [" + chatId + "] successfully.");
                             } else {
                                 println("Telegram message sent failed. Verify below information.");
