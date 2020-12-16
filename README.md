@@ -64,6 +64,9 @@ ext_plugin_ignore_continuous_dup_alert=true
 * Deploy
     - 빌드 후 프로젝트 하위에 out 디렉토리가 생기며, 디펜던시 라이브러리와 함께 scouter-plugin-server-alert-telegram.jar 파일을 복사하여 스카우터 서버 설치 경로 하위의 lib/ 폴더에 저장한다.
     
+### Requirement
+* Telegram 서버가 TLSv1을 지원하지 않으므로, Scouter Server를 Java 8 이상으로 구동시켜야 합니다. 
+    
 ## Appendix
 ##### Telegram 데모 채널 #####
 * https://telegram.me/ScouterDemoChannel 을 통해 Telegram 봇을 이용한 메시지 수신 기능을 확인할 수 있습니다.
